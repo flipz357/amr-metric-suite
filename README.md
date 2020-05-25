@@ -94,7 +94,6 @@ see *graph-structure-error*
 
 ## References
 
-```
 
 GPLA: Lyu, Chunchuan, and Ivan Titov. "Amr parsing as graph prediction with latent alignment." arXiv preprint arXiv:1805.05286 (2018). [github](https://github.com/ChunchuanLv/AMR_AS_GRAPH_PREDICTION)
 STOG: Zhang, Sheng, et al. "AMR Parsing as Sequence-to-Graph Transduction." arXiv preprint arXiv:1905.08704 (2019). [github](https://github.com/sheng-z/stog)
@@ -102,7 +101,6 @@ TOP-DOWN: Cai, Deng, and Wai Lam. "Core Semantic First: A Top-down Approach for 
 Smatch: Cai, Shu, and Kevin Knight. "Smatch: an evaluation metric for semantic feature structures." Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers). 2013.
 S2match: Opitz, Juri et al. "AMR Similarity Metrics from Principles" arXiv preprint arXiv:2001.10929 (2020).
 
-'''
 
 ## Citation of this work
 
