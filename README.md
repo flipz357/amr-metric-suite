@@ -4,11 +4,10 @@ It accompanies the *TACL paper "AMR similarity metrics from principles (2020, to
 
 ## Content of this repo
 
-Scripts for calculating Smatch and S2match in 
-python2 and python3 (see directory *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*). 
-And scripts for calculating the structure error of two AMR graph banks. (see directory *graph-structure-error*).
+Scripts for calculating Smatch and S2match.
+And scripts for calculating the structure error of two AMR graph banks. 
 
-Below is the current state-of-the-art performacne of AMR parsers wrt to these metrics and some additional information.
+Current state-of-the-art performacne of AMR parsers wrt to these metrics and some additional information.
 
 
 ## AMR state-of-the-art
