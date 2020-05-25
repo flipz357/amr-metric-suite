@@ -1,0 +1,52 @@
+# The giraffe sleeps.
+( d / sleep-01
+  :ARG0 (g / giraffe))
+
+#The kitten runs.
+( d / run-01
+  :ARG0 (k / kitten))
+
+# In april, a woman drives from Rom to Paris by car.
+(d / drive-01
+  :ARG0 (w / woman)
+  :ARG1 (c1 / city
+      :name "Rome")
+  :ARG2 ( c2 / city
+      :name "Paris")
+  :ARG3 (c / car)
+  :time ( m / month 
+        :name "April"))
+
+# ::snt The Navy of the Russian Federation is in poor shape.
+# ::tok The Navy of the Russian Federation is in poor shape .
+# ::alignments 9-10|0 8-9|0.1 4-6|0.0.2+0.0.0.1+0.0.0.0+0.0.0+0.0 1-4|0.0.1.0.2+0.0.1.0.1+0.0.1.0.0+0.0.1.0+0.0.1 ::annotator JAMR dev v0.3 ::date 2018-08-16T11:11:06.543
+(s / shape-01 
+      :ARG1 (c / country 
+            :name (n / name 
+                  :op1 "Russian" 
+                  :op2 "Federation") 
+            :poss (o / organization 
+                  :name (n2 / name 
+                        :op1 "Navy" 
+                        :op2 "of" 
+                        :op3 "the")) 
+            :wiki "Russia") 
+      :manner (p / poor))
+
+# ::id 16
+# ::snt The Navy of the Russian Federation is in poor shape.
+(x2 / military
+	:name (n / name
+		:op1 "Navy")
+	:poss (x5 / country
+		:name (n1 / name
+			:op1 "Russia"
+			:op2 "Federation"))
+	:prep-in (x10 / shape-01
+		:mod (x9 / poor)))
+
+# abstract sent
+(p / predicate-01
+    :ARG1 (e1 / entity)
+    :ARG2 (e2 / entity)
+    :ARG3 e)

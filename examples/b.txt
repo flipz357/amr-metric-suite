@@ -1,0 +1,43 @@
+#The cat sprints.
+( d / sprint-01
+  :ARG0 (c / cat))
+
+#The cat sprints.
+( d / sprint-01
+  :ARG0 (c / cat))
+
+# In April, a woman travels from Rome to Paris by car.
+(d / travel-01
+  :ARG0 (w / woman)
+  :ARG1 (c1 / city
+      :name "Rome")
+  :ARG2 (c2 / city
+      :name "Paris")
+  :ARG3 ( c / car )
+  :time ( m / month 
+      :name "April"))
+
+# ::id PROXY_APW_ENG_20080515_0931.29 ::date 2013-07-21T01:02:31 ::snt-type body ::annotator SDL-AMR-09 ::preferred
+# ::snt The Navy of the Russian Federation is in poor shape.
+# ::save-date Wed Aug 14, 2013 ::file PROXY_APW_ENG_20080515_0931_29.txt
+(n3 / navy
+      :mod (c / country :wiki "Russia"
+            :name (n2 / name :op1 "Russian" :op2 "Federation"))
+      :mod (s / shape
+            :mod (p / poverty)))
+
+# ::id PROXY_APW_ENG_20080515_0931.29 ::date 2013-07-21T01:02:31 ::snt-type body ::annotator SDL-AMR-09 ::preferred
+# ::snt The Navy of the Russian Federation is in poor shape.
+# ::save-date Wed Aug 14, 2013 ::file PROXY_APW_ENG_20080515_0931_29.txt
+(n3 / navy
+      :mod (c / country :wiki "Russia"
+            :name (n2 / name :op1 "Russian" :op2 "Federation"))
+      :mod (s / shape
+            :mod (p / poverty)))
+
+# abstract sent
+(p / predicate-01
+    :ARG1 (e1 / entity)
+    :ARG2 (e2 / entity)
+    :ARG3 e2 )
+
