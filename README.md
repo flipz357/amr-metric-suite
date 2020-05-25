@@ -29,14 +29,16 @@ and we need to install python packages *scipy* and *numpy* (for similarity calcu
 Using python 2.7:
 
 ```
-./easy_eval_py2.sh
+./easy_eval_py2.sh <file1> <file2>
 ```
 
 Using python 3.x:
 
 ```
-./easy_eval_py3.sh
+./easy_eval_py3.sh <file1> <file2>
 ```
+
+*filex* is a file in standard AMR format, i.e., AMRs separated by empty line. See examples/ for examples.
 
 ### More details (e.g. run only s2match with different vectors)
 
