@@ -44,9 +44,6 @@ Using python 3.x:
 
 see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 
-## run structure error with python2 and python3 
-
-see *graph-structure-error*
 
 ## AMR state-of-the-art
 
