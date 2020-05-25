@@ -69,7 +69,7 @@ download_glove.sh
 
 and we need to install python packages *scipy* and *numpy* (for similarity calculation) and *networkx* and *penman* to calculate graph structure error.
 
-### Quickstart
+### Quickstart, extensive AMR evaluation
 
 Using python 2.7:
 
