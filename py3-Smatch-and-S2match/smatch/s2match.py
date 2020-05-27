@@ -6,7 +6,10 @@ This script computes smatch score between two AMRs.
 For detailed description of smatch, see http://www.isi.edu/natural-language/amr/smatch-13.pdf
 
 """
-import amr
+try:
+    import amr
+except ModuleNotFoundError:
+    import smatch.amr as amr
 import os
 import random
 import sys
