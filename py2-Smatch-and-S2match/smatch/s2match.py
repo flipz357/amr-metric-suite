@@ -14,6 +14,7 @@ import time
 from scipy.spatial.distance import euclidean, cosine, cityblock
 import numpy as np
 import math
+import re
 
 # total number of iteration in smatch computation
 iteration_num = 5
@@ -90,6 +91,8 @@ def build_arg_parser():
     parser.add_argument('--ms', action='store_true', default=False,
                         help='Output multiple scores (one AMR pair a score)' \
                              'instead of a single document-level smatch score (Default: false)')
+    parser.add_argument('-multi_token_concept_strategy', required = False, default="split", type=str,
+                    help='default: \"split\"     you can also use \"None\": only direct vector lookup')
     parser.add_argument('--pr', action='store_true', default=False,
                         help="Output precision and recall as well as the f-score. Default: false")
     return parser
@@ -116,7 +119,7 @@ def cityblock_sim(a,b):
 
 def get_best_match(instance1, attribute1, relation1,
                    instance2, attribute2, relation2,
-                   prefix1, prefix2, vectors, cutoff, diffsense, simfun):
+                   prefix1, prefix2, vectors, cutoff, diffsense, simfun, mwp):
     """
     Get the highest triple match number between two sets of triples via hill-climbing.
     Arguments:
@@ -138,7 +141,7 @@ def get_best_match(instance1, attribute1, relation1,
     # weight_dict is a dictionary that maps a pair of node
     (candidate_mappings, weight_dict) = compute_pool(instance1, attribute1, relation1,
                                                      instance2, attribute2, relation2,
-                                                     prefix1, prefix2, vectors, cutoff, diffsense, simfun)
+                                                     prefix1, prefix2, vectors, cutoff, diffsense, simfun, mwp)
 
     if verbose:
         print >> DEBUG_LOG, "Candidate mappings:"
@@ -184,35 +187,71 @@ def get_best_match(instance1, attribute1, relation1,
     return best_mapping, best_match_num
 
 
-def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim):
-    a_clean=a
-    b_clean=b
-    #first we remove the sense to check if preds are equal
-    if "-" in a_clean:
-        a_clean = "-".join(a.split("-")[:-1])
-    if "-" in b_clean:
-        b_clean = "-".join(b.split("-")[:-1])
-    # if preds are equal
-    if a_clean == b_clean:
-        #and sense is equal, return max score (1.0)
-        if a == b:
-            return 1.0
-        #now we have a different sense, so we increment with the minium possible score (cutoff value)
-        else:
-            return diffsense
-    # we know now that two concepts are different and get their vectors
-    a_vec = vecs.get(a_clean)
-    b_vec = vecs.get(b_clean)
+
+def maybe_get_vec(word,vecs, mwp ="split"):
+    v = None
+    #print(word)
+    if word in vecs:
+        v = vecs[word]
+    #if it's a multi-word concept and not contained in vectors
+    elif "-" in word:
+
+        #if mwp strat = split, split multi-word and sum partial tokens
+        if mwp == "split":
+            ws = word.split("-")
+            l = []
+            for w in ws:
+                if w in vecs:
+                    l.append(vecs[w])
+            if l:
+                v = np.sum(np.array(l),axis=0)
+    return v
+    
+def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"):
+    
+    # if identical, return 1
+    if a == b:
+        return 1.00
+    
+    
+    # in case it's a pred, we also keep a string without the sense
+    a_wo_sense=None
+    b_wo_sense=None
+    
+    
+    #if it's a pred we remove the sense, for now
+    if "-" in a and re.match(".*[0-9]+", a):
+        a_wo_sense = "-".join(a.split("-")[:-1])
+    if "-" in b and  re.match(".*[0-9]+", b):
+        b_wo_sense = "-".join(b.split("-")[:-1])
+
+    # if preds are equal but not sense return diffsense score
+    if a_wo_sense and b_wo_sense and a_wo_sense == b_wo_sense:
+        return diffsense
+
+    # now we know now that two concepts are different and get their vectors
+    if a_wo_sense:
+        a_vec = maybe_get_vec(a_wo_sense,vecs, mwp)
+    else:
+        a_vec = maybe_get_vec(a,vecs)
+    if b_wo_sense:
+        b_vec = maybe_get_vec(b_wo_sense,vecs, mwp)
+    else:
+        b_vec = maybe_get_vec(b,vecs)
+
     # if there is no vector, return 0
     if a_vec is None or b_vec is None:
         return 0.00
+
     # if it's a pred, we add the vector for the morphological 3rd person extension
-    if "-" in a:
-        if a_clean+"s" in vecs:
-            a_vec+=vecs[a_clean+"s"]
-    if "-" in b:
-        if b_clean+"s" in vecs:
-            b_vec+=vecs[b_clean+"s"]
+    if "-" in a and a_wo_sense:
+        v = maybe_get_vec(a_wo_sense+"s", vecs, mwp="None")
+        if v is not None:
+            a_vec+=v
+    if "-" in b and b_wo_sense:
+        v = maybe_get_vec(b_wo_sense+"s", vecs, mwp="None")
+        if v is not None:
+            b_vec+=v
     
     #similarity 
     sim = simfun(a_vec,b_vec)
@@ -223,9 +262,8 @@ def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim):
         return sim
     else:
         return 0.00
-    
 
-def maybe_has_sim(a,b,sim_dict,vecs={},cutoff=0.5, diffsense=0.5,simfun=cosine_sim):
+def maybe_has_sim(a,b,sim_dict,vecs={},cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"):
     #maybe we have the computed similarities already?
     if a+"_"+b in sim_dict: 
         return sim_dict[a+"_"+b] 
@@ -234,7 +272,7 @@ def maybe_has_sim(a,b,sim_dict,vecs={},cutoff=0.5, diffsense=0.5,simfun=cosine_s
         return sim_dict[b+"_"+a] 
     else:
         #compute similarity and save
-        s=maybe_sim(a,b,vecs,cutoff=cutoff, diffsense=diffsense, simfun=simfun)
+        s=maybe_sim(a,b,vecs,cutoff=cutoff, diffsense=diffsense, simfun=simfun, mwp="split")
         if verbose:
             print >> DEBUG_LOG, "Similarity", a, b, s
         sim_dict[a+"_"+b] = s
@@ -247,7 +285,7 @@ def maybe_has_sim(a,b,sim_dict,vecs={},cutoff=0.5, diffsense=0.5,simfun=cosine_s
 
 def compute_pool(instance1, attribute1, relation1,
                  instance2, attribute2, relation2,
-                 prefix1, prefix2, vectors,cutoff=0.5, diffsense=0.5, simfun=cosine_sim):
+                 prefix1, prefix2, vectors,cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp="split"):
     """
     compute all possible node mapping candidates and their weights (the graded triple matching number gain resulting from
     mapping one node in AMR 1 to another node in AMR2)
@@ -302,7 +340,7 @@ def compute_pool(instance1, attribute1, relation1,
             if instance1[i][0].lower() == instance2[j][0].lower():
                 value_1 = instance1[i][2].lower()
                 value_2 = instance2[j][2].lower()
-                similarity = maybe_has_sim(value_1,value_2,sim_dict,vecs=vectors,cutoff=cutoff, diffsense=diffsense, simfun=simfun)
+                similarity = maybe_has_sim(value_1,value_2,sim_dict,vecs=vectors,cutoff=cutoff, diffsense=diffsense, simfun=simfun, mwp=mwp)
                 # get node index by stripping the prefix
                 node1_index = int(instance1[i][1][len(prefix1):])
                 node2_index = int(instance2[j][1][len(prefix2):])
@@ -869,7 +907,8 @@ def main(arguments):
             print >> DEBUG_LOG, relation2
         (best_mapping, best_match_num_soft) = get_best_match(instance1, attributes1, relation1,
                                                         instance2, attributes2, relation2,
-                                                        prefix1, prefix2,vectors,arguments.cutoff, arguments.diffsense, simfun)
+                                                        prefix1, prefix2,vectors,arguments.cutoff, 
+                                                        arguments.diffsense, simfun, arguments.multi_token_concept_strategy)
         if verbose:
             print >> DEBUG_LOG, "best match number", best_match_num_soft
             print >> DEBUG_LOG, "best node mapping", best_mapping
@@ -922,7 +961,7 @@ def load_vecs(fp):
 
 #code necessary for Marco Damonte's subtask metric like reentrancies
 
-def compute_s2match_from_two_lists(list1, list2, vectorpath="../vectors/glove.6B.100d.txt", simfun="cosine", cutoff=0.5, diffsense=0.5):
+def compute_s2match_from_two_lists(list1, list2, vectorpath="../vectors/glove.6B.100d.txt", simfun="cosine", cutoff=0.5, diffsense=0.5, mwp="split"):
     
     def parse_relations(rels, v2c):
         var_list = []
@@ -1003,7 +1042,7 @@ def compute_s2match_from_two_lists(list1, list2, vectorpath="../vectors/glove.6B
             print >> DEBUG_LOG, relation2
         (best_mapping, best_match_num_soft) = get_best_match(instance1, attributes1, relation1,
                                                         instance2, attributes2, relation2,
-                                                        prefix1, prefix2,vectors,cutoff, diffsense, simfun)
+                                                        prefix1, prefix2,vectors,cutoff, diffsense, simfun, mwp)
         if verbose:
             print >> DEBUG_LOG, "best match number", best_match_num_soft
             print >> DEBUG_LOG, "best node mapping", best_mapping

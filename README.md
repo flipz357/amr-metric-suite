@@ -58,10 +58,10 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 
 | System     | Smatch  | S2match   | Year     | Code available |
 | ---        | ---     | ---       | ---      | ---            | 
-| STOG-BERT  | 76.3,   | 77.7      | 2019     | yes            |
+| STOG-BERT  | 76.3,   | 78.3      | 2019     | yes            |
 | STOG       | 74.6,   | ?         | 2019     | yes            |
-| GPLA       | 74.5,   | 76.1      | 2018     | yes            |      
-| TOP-DOWN   | 73.2,   | 74.9      | 2019     | no             |       
+| GPLA       | 74.5,   | 76.6      | 2018     | yes            |      
+| TOP-DOWN   | 73.2,   | 75.6      | 2019     | no             |       
 
 
 #### Structure error evaluation on AMR 2.0 test (lower=better)

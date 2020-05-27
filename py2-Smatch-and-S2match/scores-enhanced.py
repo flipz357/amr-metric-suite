@@ -196,7 +196,9 @@ for score in preds:
     else: 
         print 'P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float("0.00"))
 
+"""
 pr, rc, f = smatch.main(reentrancies_pred, reentrancies_gold)
+empty = False
 if len(reentrancies_gold) > 1:
     empty = True 
     for i, e in enumerate(reentrancies_gold):
@@ -209,7 +211,30 @@ if not empty:
     print 'Reentrancies -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f))
 pr, rc, f = smatch.main(srl_pred, srl_gold)
 print 'SRL -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f))
+"""
 
+empty=True
+if len(reentrancies_gold) > 1:
+    empty = True
+    for i, e in enumerate(reentrancies_gold):
+        if e[0] or reentrancies_pred[i][0]:
+            empty = False
+if empty:
+    print 'Reentrancies -> P: %.3f, R: %.3f, F: %.3f' %  (float("1.00"), float("1.00"), float("1.00"))
+else:
+    pr, rc, f = smatch.main(reentrancies_pred, reentrancies_gold)
+    print 'Reentrancies -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f))
 
+empty=True
+if len(srl_gold) > 1:
+    empty = True
+    for i, e in enumerate(srl_gold):
+        if e[0] or srl_pred[i][0]:
+            empty = False
+if empty:
+    print 'SRL -> P: %.3f, R: %.3f, F: %.3f' %  (float("1.00"), float("1.00"), float("1.00"))
+else:
+    pr, rc, f = smatch.main(srl_pred, srl_gold)
+    print 'SRL -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f))
 
 

@@ -207,6 +207,7 @@ cutoff= float(sys.argv[5])
 diffsense= float(sys.argv[6])
 
 
+empty=True
 if len(reentrancies_gold) > 1:
     empty = True 
     for i, e in enumerate(reentrancies_gold):
@@ -218,7 +219,7 @@ else:
     pr, rc, f = compute_s2match_from_two_lists(reentrancies_pred, reentrancies_gold, vectorpath, simfun, cutoff, diffsense)
     print 'Reentrancies -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f))
 
-
+empty=True
 if len(srl_gold) > 1:
     empty = True 
     for i, e in enumerate(srl_gold):
