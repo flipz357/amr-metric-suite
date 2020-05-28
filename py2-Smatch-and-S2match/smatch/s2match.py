@@ -268,7 +268,7 @@ def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"
     
     if sim > cutoff:
 
-        #eg. hit-01 vs punch or hit-01 vs punch-0x ---> diffsense*(sim(hit-01,punch))
+        #eg. hit-01 vs punch or hit-01 vs punch-0x ---> diffsense*(sim(hit,punch))
         if bool(a_wo_sense) or bool(b_wo_sense):
             return sim*diffsense
         else:
