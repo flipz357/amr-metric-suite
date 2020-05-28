@@ -88,7 +88,8 @@ def build_arg_parser():
     parser.add_argument('-cutoff', required=False, type=float, default=0.5,
                         help='only sim > cutoff taken into account')
     parser.add_argument('-diffsense', required=False, type=float, default=0.5,
-                        help='sim of predicates with differing sense')
+                        help='coefficient of similarity when senses differ, e.g.'\
+                                'hit-01 vs hit-02 ---> coef*1.0 ;;;;; hit-01 vs jump-0x ---> coef*sim(hit,jump)'
     parser.add_argument('-r', type=int, default=4, help='Restart number (Default:4)')
     parser.add_argument('-v', action='store_true', help='Verbose output (Default:false)')
     parser.add_argument('--ms', action='store_true', default=False,
@@ -216,31 +217,38 @@ def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"
     if a == b:
         return 1.00
     
+    # in case one or two are a pred, we also keep a string without the sense
     
-    # in case it's a pred, we also keep a string without the sense
     a_wo_sense=None
     b_wo_sense=None
-    
-    
+
+
     #if it's a pred we remove the sense, for now
     if "-" in a and re.match(".*[0-9]+", a):
         a_wo_sense = "-".join(a.split("-")[:-1])
     if "-" in b and  re.match(".*[0-9]+", b):
         b_wo_sense = "-".join(b.split("-")[:-1])
 
-    # if preds are equal but not sense return diffsense score
+    # if preds are equal but not sense return diffsense score, e.g., hit-01 vs hit-02
     if a_wo_sense and b_wo_sense and a_wo_sense == b_wo_sense:
-        return diffsense
+        return 1.00*diffsense
+
+    #if same string but only one is pred --> different sense of concept, e.g. hit-01 vs hit
+    elif a_wo_sense and a_wo_sense == b:
+        return 1.00*diffsense
+
+    elif b_wo_sense and b_wo_sense == a:
+        return 1.00*diffsense
 
     # now we know now that two concepts are different and get their vectors
     if a_wo_sense:
-        a_vec = maybe_get_vec(a_wo_sense,vecs, mwp)
+        a_vec = maybe_get_vec(a_wo_sense,vecs, "None")
     else:
-        a_vec = maybe_get_vec(a,vecs)
+        a_vec = maybe_get_vec(a,vecs, mwp)
     if b_wo_sense:
-        b_vec = maybe_get_vec(b_wo_sense,vecs, mwp)
+        b_vec = maybe_get_vec(b_wo_sense,vecs, "None")
     else:
-        b_vec = maybe_get_vec(b,vecs)
+        b_vec = maybe_get_vec(b,vecs, mwp)
 
     # if there is no vector, return 0
     if a_vec is None or b_vec is None:
@@ -255,14 +263,19 @@ def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"
         v = maybe_get_vec(b_wo_sense+"s", vecs, mwp="None")
         if v is not None:
             b_vec+=v
-    
+
     #similarity 
     sim = simfun(a_vec,b_vec)
     if not sim:
         return 0.00
-    
+
     if sim > cutoff:
-        return sim
+
+        #eg. hit-01 vs punch or hit-01 vs punch-0x ---> diffsense*(sim(hit-01,punch))
+        if bool(a_wo_sense) or bool(b_wo_sense):
+            return sim*diffsense
+        else:
+            return sim
     else:
         return 0.00
 
