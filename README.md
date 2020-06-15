@@ -103,14 +103,13 @@ S2match: Opitz, Juri et al. "AMR Similarity Metrics from Principles" arXiv prepr
 
 
 ```
-@misc{opitz2020amr,
-    title={AMR Similarity Metrics from Principles},
-    author={Juri Opitz and Letitia Parcalabescu and Anette Frank},
-    year={2020},
-    eprint={2001.10929},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+@article{opitz2020amr,
+  title={AMR Similarity Metrics from Principles},
+  author={Opitz, Juri and Parcalabescu, Letitia and Frank, Anette},
+  journal={arXiv preprint arXiv:2001.10929},
+  year={2020}
 }
+
 ``` 
 
 ## Changelog
