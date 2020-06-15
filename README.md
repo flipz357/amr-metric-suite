@@ -58,10 +58,10 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 
 | System     | Smatch  | S2match   | Year     | Code available |
 | ---        | ---     | ---       | ---      | ---            | 
-| STOG-BERT  | 76.3,   | 77.9      | 2019     | yes            |
-| STOG       | 74.6,   | ?         | 2019     | yes            |
-| GPLA       | 74.5,   | 76.2      | 2018     | yes            |      
-| TOP-DOWN   | 73.2,   | 75.0      | 2019     | no             |       
+| STOG-BERT  | 76.3,   | 77.9      | 2019     | [yes](https://github.com/sheng-z/stog)            |
+| STOG       | 74.6,   | ?         | 2019     | [yes](https://github.com/sheng-z/stog)            |
+| GPLA       | 74.5,   | 76.2      | 2018     | [yes](https://github.com/ChunchuanLv/AMR_AS_GRAPH_PREDICTION)            |      
+| TOP-DOWN   | 73.2,   | 75.0      | 2019     | [yes](https://github.com/jcyk/AMR-parser)             |       
 
 
 #### Structure error evaluation on AMR 2.0 test (lower=better)
@@ -92,7 +92,7 @@ GPLA: Lyu, Chunchuan, and Ivan Titov. "Amr parsing as graph prediction with late
 
 STOG: Zhang, Sheng, et al. "AMR Parsing as Sequence-to-Graph Transduction." arXiv preprint arXiv:1905.08704 (2019). [github](https://github.com/sheng-z/stog)
 
-TOP-DOWN: Cai, Deng, and Wai Lam. "Core Semantic First: A Top-down Approach for AMR Parsing." arXiv preprint arXiv:1909.04303 (2019). [github](https://github.com/sheng-z/stog)(https://github.com/jcyk/AMR-parser)
+TOP-DOWN: Cai, Deng, and Wai Lam. "Core Semantic First: A Top-down Approach for AMR Parsing." arXiv preprint arXiv:1909.04303 (2019). [github](https://github.com/jcyk/AMR-parser)
 
 Smatch: Cai, Shu, and Kevin Knight. "Smatch: an evaluation metric for semantic feature structures." Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers). 2013.
 
