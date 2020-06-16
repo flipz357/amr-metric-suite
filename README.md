@@ -19,7 +19,7 @@ for S2match, word vectors (e.g. Glove) need to be downloaded and stored in the v
 e.g.:
 
 ```
-download_glove.sh
+./download_glove.sh
 ```
 
 and we need to install python packages *scipy* and *numpy* (for similarity calculation) and *networkx* and *penman* to calculate graph structure error.
@@ -82,7 +82,7 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 | STOG-BERT  | BERT             | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |
 | STOG       | GloVe 300d       | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |
 | GPLA       | Glove 300d       | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner         | yes          | no   |
-| TOP-DOWN   | random           | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner         | no           | no   |
+| TOP-DOWN   | Glove 300d           | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner         | no           | no   |
 
 
 ## References
