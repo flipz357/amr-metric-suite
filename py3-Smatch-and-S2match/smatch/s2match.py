@@ -89,7 +89,7 @@ def build_arg_parser():
                         help='only sim > cutoff taken into account')
     parser.add_argument('-diffsense', required=False, type=float, default=0.5,
                         help='coefficient of similarity when senses differ, e.g.'\
-                                'hit-01 vs hit-02 ---> coef*1.0 ;;;;; hit-01 vs jump-0x ---> coef*sim(hit,jump)'
+                                'hit-01 vs hit-02 ---> coef*1.0 ;;;;; hit-01 vs jump-0x ---> coef*sim(hit,jump)')
     parser.add_argument('-r', type=int, default=4, help='Restart number (Default:4)')
     parser.add_argument('-v', action='store_true', help='Verbose output (Default:false)')
     parser.add_argument('--ms', action='store_true', default=False,
