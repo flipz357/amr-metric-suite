@@ -39,16 +39,16 @@ The different metrics were introduced in the paper below, which also uses them t
 
 **(Some of the metrics were recently fixed and updated)**
 
+
+**Smatch fine-grained Usage with fix** ```./evaluation-fixed-smatch.sh <parsed data> <gold data>```
+
+**S2match fine-grained Usage with fix** ```./evaluation-fixed-s2match.sh <parsed data> <gold data>```
+
 ## Fixes
 
 **Fix for comparing single graphs** previously, if e.g., gold graph has no negation and atuomatic graph has no negation, then Smatch was set to 0. With the fix, Smatch is set to 1, in those scenarios. This should not have any effects on corpus level evaluation.
 
-**Smatch Usage with fix** ```./evaluation-fixed-smatch.sh <parsed data> <gold data>```
-**S2match Usage with fix** ```./evaluation-fixed-s2match.sh <parsed data> <gold data>```
 
 
-**Old Usage:** ```./evaluation.sh <parsed data> <gold data>```,
-where <parsed data> and <gold data> are two files which contain multiple AMRs. A blank line is used to separate two AMRs (same format required by Smatch).
 
-**Usage with S2match alignment:** ```
 
