@@ -206,30 +206,31 @@ simfun = sys.argv[4]
 cutoff= float(sys.argv[5])
 diffsense= float(sys.argv[6])
 
-
-empty=True
-if len(reentrancies_gold) > 1:
-    empty = True 
-    for i, e in enumerate(reentrancies_gold):
-        if e[0] or reentrancies_pred[i][0]:
-            empty = False
+empty = True
+for i, e in enumerate(reentrancies_gold):
+    if e[0]:
+        empty = False
+for i, e in enumerate(reentrancies_pred):
+    if e[0]:
+        empty = False
 if empty:
-    print 'Reentrancies -> P: %.3f, R: %.3f, F: %.3f' %  (float("1.00"), float("1.00"), float("1.00"))
+    print ('Reentrancies -> P: %.3f, R: %.3f, F: %.3f' %  (float("1.00"), float("1.00"), float("1.00")))
 else:
     pr, rc, f = compute_s2match_from_two_lists(reentrancies_pred, reentrancies_gold, vectorpath, simfun, cutoff, diffsense)
-    print 'Reentrancies -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f))
+    print ('Reentrancies -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f)))
 
-empty=True
-if len(srl_gold) > 1:
-    empty = True 
-    for i, e in enumerate(srl_gold):
-        if e[0] or srl_pred[i][0]:
-            empty = False
+empty = True
+for i, e in enumerate(srl_gold):
+    if e[0]:
+        empty = False
+for i, e in enumerate(srl_pred):
+    if e[0]:
+        empty = False
 if empty:
-    print 'SRL -> P: %.3f, R: %.3f, F: %.3f' %  (float("1.00"), float("1.00"), float("1.00"))
+    print ('SRL -> P: %.3f, R: %.3f, F: %.3f' %  (float("1.00"), float("1.00"), float("1.00")))
 else:
     pr, rc, f = compute_s2match_from_two_lists(srl_pred, srl_gold, vectorpath, simfun, cutoff, diffsense)
-    print 'SRL -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f))
+    print ('SRL -> P: %.3f, R: %.3f, F: %.3f' % (float(pr), float(rc), float(f)))
 
 
 
