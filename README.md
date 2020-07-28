@@ -56,47 +56,54 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 
 #### Evaluation Results on AMR 2.0 test (higher=better)
 
-| System     | Smatch  | S2match   | Year     | Code available |
-| ---        | ---     | ---       | ---      | ---            | 
-| STOG-BERT  | 76.3,   | 77.9      | 2019     | [yes](https://github.com/sheng-z/stog)            |
-| STOG       | 74.6,   | ?         | 2019     | [yes](https://github.com/sheng-z/stog)            |
-| GPLA       | 74.5,   | 76.2      | 2018     | [yes](https://github.com/ChunchuanLv/AMR_AS_GRAPH_PREDICTION)            |      
-| TOP-DOWN   | 73.2,   | 75.0      | 2019     | [yes](https://github.com/jcyk/AMR-parser)             |       
+| System       | Smatch  | S2match   | Year     | Code available |
+| ---          | ---     | ---       | ---      | ---            | 
+| GSII         | 80.1    | 81.5      | 2020     | [yes](https://github.com/jcyk/AMR-gs)          |
+| GSII-noRecat | 78.6    | 79.9      | 2020     | [yes](https://github.com/jcyk/AMR-gs)          |
+| STOG-BERT    | 76.3,   | 77.9      | 2019     | [yes](https://github.com/sheng-z/stog)            |
+| STOG         | 74.6,   | ?         | 2019     | [yes](https://github.com/sheng-z/stog)            |
+| GPLA         | 74.5,   | 76.2      | 2018     | [yes](https://github.com/ChunchuanLv/AMR_AS_GRAPH_PREDICTION)            |      
+| TOP-DOWN     | 73.2,   | 75.0      | 2019     | [yes](https://github.com/jcyk/AMR-parser)             |       
 
 
 #### Structure error evaluation on AMR 2.0 test (lower=better)
 
-| System     | Degree  | Density   |  size(V)     | size(E)    |
-| ---        | ---     | ---       | ---          | ---        | 
-| GPLA       | 0.083,  | 0.0068    | 1.99         | 2.90       |      
-| STOG-BERT  | 0.082,  | 0.0069    | 2.42         | 3.19       |
-| STOG       | ?       | ?         | ?            |  ?         |
-| TOP-DOWN   | 0.110   | 0.0078    | 2.37         | 3.32       |       
+| System       | Degree  | Density   |  size(V)     | size(E)    |
+| ---          | ---     | ---       | ---          | ---        | 
+| GSII         | 0.071   | 0.0068    | 1.87         | 2.59       |
+| GPLA         | 0.083,  | 0.0068    | 1.99         | 2.90       |      
+| GSII-noRecat | 0.102   | 0.0073    | 2.14         | 2.75       |
+| STOG-BERT    | 0.082,  | 0.0069    | 2.42         | 3.19       |
+| STOG         | ?       | ?         | ?            |  ?         |
+| TOP-DOWN     | 0.110   | 0.0078    | 2.37         | 3.32       |       
 
 
 #### System dependencies
 
 
-| System  | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                         | recategorize | anon |
-| ---     | ---                 | ---                | ---                | ---                  | ---                  | ---                            | ---          | ---  |
-| STOG-BERT  | BERT             | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |
-| STOG       | GloVe 300d       | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |
-| GPLA       | Glove 300d       | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner         | yes          | no   |
-| TOP-DOWN   | Glove 300d           | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner         | no           | no   |
+| System        | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                         | recategorize | anon | notes |
+| ---           | ---                 | ---                | ---                | ---                  | ---                  | ---                            | ---          | ---  | same preproc as STOG |
+| GSII          | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |                      | 
+| GSII-noRecat  | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner         | no           | no   |                      |
+| STOG-BERT     | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |                      |
+| STOG          | GloVe 300d          | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |                      |
+| GPLA          | Glove 300d          | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner         | yes          | no   |                      |
+| TOP-DOWN      | Glove 300d          | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner         | no           | no   |                      |
 
 
 ## References
 
+GSII: Deng Cai and Wai Lam. "AMR Parsing via Graph-Sequence Iterative Inference". arXiv preprint arXiv:2004.05572 (2020). [github](https://github.com/jcyk/AMR-gs)
 
-GPLA: Lyu, Chunchuan, and Ivan Titov. "Amr parsing as graph prediction with latent alignment." arXiv preprint arXiv:1805.05286 (2018). [github](https://github.com/ChunchuanLv/AMR_AS_GRAPH_PREDICTION)
+GPLA: Chunchuan Lyu and Ivan Titov. "Amr parsing as graph prediction with latent alignment." arXiv preprint arXiv:1805.05286 (2018). [github](https://github.com/ChunchuanLv/AMR_AS_GRAPH_PREDICTION)
 
-STOG: Zhang, Sheng, et al. "AMR Parsing as Sequence-to-Graph Transduction." arXiv preprint arXiv:1905.08704 (2019). [github](https://github.com/sheng-z/stog)
+STOG: Sheng Zhang et al. "AMR Parsing as Sequence-to-Graph Transduction." arXiv preprint arXiv:1905.08704 (2019). [github](https://github.com/sheng-z/stog)
 
-TOP-DOWN: Cai, Deng, and Wai Lam. "Core Semantic First: A Top-down Approach for AMR Parsing." arXiv preprint arXiv:1909.04303 (2019). [github](https://github.com/jcyk/AMR-parser)
+TOP-DOWN: Deng Cai and Wai Lam. "Core Semantic First: A Top-down Approach for AMR Parsing." arXiv preprint arXiv:1909.04303 (2019). [github](https://github.com/jcyk/AMR-parser)
 
-Smatch: Cai, Shu, and Kevin Knight. "Smatch: an evaluation metric for semantic feature structures." Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers). 2013.
+Smatch: Shu Cai and Kevin Knight. "Smatch: an evaluation metric for semantic feature structures." Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers). 2013.
 
-S2match: Opitz, Juri et al. "AMR Similarity Metrics from Principles" arXiv preprint arXiv:2001.10929 (2020).
+S2match: Juri Opitz et al. "AMR Similarity Metrics from Principles" arXiv preprint arXiv:2001.10929 (2020).
 
 
 ## Citation of this work
