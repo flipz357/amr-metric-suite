@@ -81,9 +81,9 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 #### System dependencies
 
 
-| System        | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                         | recategorize | anon | notes |
-| ---           | ---                 | ---                | ---                | ---                  | ---                  | ---                            | ---          | ---  | same preproc as STOG |
-| GSII          | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |                      | 
+| System        | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                         | recategorize | anon | notes                |
+| ---           | ---                 | ---                | ---                | ---                  | ---                  | ---                            | ---          | ---  | ---                  |
+| GSII          | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  | same pre/post proc as STOG | 
 | GSII-noRecat  | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner         | no           | no   |                      |
 | STOG-BERT     | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |                      |
 | STOG          | GloVe 300d          | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |                      |
