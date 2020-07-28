@@ -70,10 +70,10 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 
 | System       | Degree  | Density   |  size(V)     | size(E)    |
 | ---          | ---     | ---       | ---          | ---        | 
-| GSII         | 0.071   | 0.0068    | 1.87         | 2.59       |
-| GPLA         | 0.083,  | 0.0068    | 1.99         | 2.90       |      
+| GSII         | 0.071   | 0.0070    | 1.87         | 2.59       |
+| GPLA         | 0.083   | 0.0068    | 1.99         | 2.90       |      
 | GSII-noRecat | 0.102   | 0.0073    | 2.14         | 2.75       |
-| STOG-BERT    | 0.082,  | 0.0069    | 2.42         | 3.19       |
+| STOG-BERT    | 0.082   | 0.0069    | 2.42         | 3.19       |
 | STOG         | ?       | ?         | ?            |  ?         |
 | TOP-DOWN     | 0.110   | 0.0078    | 2.37         | 3.32       |       
 
