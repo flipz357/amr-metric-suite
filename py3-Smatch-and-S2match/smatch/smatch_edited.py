@@ -7,7 +7,7 @@ For detailed description of smatch, see http://www.isi.edu/natural-language/amr/
 
 """
 import pickle
-from smatch import amr
+from smatch import amr_py3 as amr
 import os
 import random
 import sys

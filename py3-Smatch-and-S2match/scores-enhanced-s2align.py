@@ -14,7 +14,7 @@ adapted for s2 align by Juri Opitz
 '''
 
 import sys
-import smatch.amr as amr
+import smatch.amr_py3 as amr
 from smatch.s2match import compute_s2match_from_two_lists
 from collections import defaultdict
 import re
