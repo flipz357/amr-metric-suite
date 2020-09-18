@@ -10,7 +10,7 @@ negation detection, reentrancy detection and SRL.
 '''
 
 import sys
-import smatch.amr as amr
+import smatch.amr_py3 as amr
 import smatch.smatch_edited as smatch
 from collections import defaultdict
 import re

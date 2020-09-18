@@ -7,9 +7,9 @@ For detailed description of smatch, see http://www.isi.edu/natural-language/amr/
 
 """
 try:
-    import amr
+    import amr_py3 as amr
 except ModuleNotFoundError:
-    import smatch.amr as amr
+    import smatch.amr_py3 as amr
 import os
 import random
 import sys
