@@ -1,6 +1,6 @@
 # amr-metric-suite 
 This project collects a state-of-the-art tracker table for AMR parsers and AMR graph matching metrics. 
-It accompanies the *TACL paper "AMR similarity metrics from principles (2020, to appear)"*.
+It accompanies the *[TACL paper "AMR similarity metrics from principles](https://transacl.org/index.php/tacl/article/view/2205/545)*.
 
 ## Content of this repo
 
@@ -106,17 +106,22 @@ Smatch: Shu Cai and Kevin Knight. "Smatch: an evaluation metric for semantic fea
 S2match: Juri Opitz et al. "AMR Similarity Metrics from Principles" arXiv preprint arXiv:2001.10929 (2020).
 
 
-## Citation of this work
+## Citation 
 
+If you like the idea please consider citing
 
 ```
-@article{opitz2020amr,
-  title={AMR Similarity Metrics from Principles},
-  author={Opitz, Juri and Parcalabescu, Letitia and Frank, Anette},
-  journal={arXiv preprint arXiv:2001.10929},
-  year={2020}
+article{TACL2205,
+	author = {Juri Opitz and Anette Frank and Letitia Parcalabescu},
+	title = {AMR Similarity Metrics from Principles},
+	journal = {Transactions of the Association for Computational Linguistics},
+	volume = {8},
+	number = {0},
+	year = {2020},
+	keywords = {},
+	abstract = {Different metrics have been proposed to compare Abstract Meaning Representation (AMR) graphs. The canonical SMATCH metric (Cai and Knight, 2013) aligns the variables of two graphs and assesses triple matches. The recent SEMBLEU metric (Song and Gildea, 2019) is based on the machine-translation metric BLEU (Papineni et al., 2002) and increases computational efficiency by ablating the variable-alignment.In this paper, i) we establish criteria that enable researchers to perform a principled assessment of metrics comparing meaning representations like AMR; ii) we undertake a thorough analysis of SMATCH and SEMBLEU where we show that the latter exhibits some undesirable properties.  For example, it does not conform to the identity of indiscernibles rule and introduces biases that are hard to control; iii) we propose a novel metric S2MATCH that is more benevolent to only very slight meaning deviations and targets the fulfilment of all established criteria. We assess its suitability and show its advantages over SMATCH and SEMBLEU. },
+	issn = {2307-387X},	pages = {522--538},	url = {https://transacl.org/index.php/tacl/article/view/2205}
 }
-
 ``` 
 
 ## Changelog
