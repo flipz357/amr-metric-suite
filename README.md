@@ -1,13 +1,13 @@
 # amr-metric-suite 
 This project collects a state-of-the-art tracker table for AMR parsers and AMR graph matching metrics. 
-It accompanies the *[TACL paper "AMR similarity metrics from principles](https://transacl.org/index.php/tacl/article/view/2205/545)*.
+It accompanies the TACL paper [AMR similarity metrics from principles](https://transacl.org/index.php/tacl/article/view/2205/545).
 
 ## Content of this repo
 
 1. Scripts for calculating Smatch and S2match (Soft Semantic match, speak [estuːmætʃ]).
 And scripts for calculating the structure error of two AMR graph banks. 
 
-2. Current state-of-the-art performacne of AMR parsers wrt to these metrics and some additional information.
+2. Current state-of-the-art performance of AMR parsers wrt to these metrics and some additional information.
 
 
 ## run Smatch or S2match with python2 and python3 
