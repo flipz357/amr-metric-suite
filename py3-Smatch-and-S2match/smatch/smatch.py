@@ -83,6 +83,9 @@ def build_arg_parser():
                              'instead of a single document-level smatch score (Default: false)')
     parser.add_argument('--pr', action='store_true', default=False,
                         help="Output precision and recall as well as the f-score. Default: false")
+    
+    parser.add_argument('--do_not_mark_quotes', action='store_true',
+                      help=":op1 \"David\" will be treated same as :op1 David")
     return parser
 
 
@@ -103,7 +106,12 @@ def build_arg_parser2():
                            'a single document-level smatch score (Default: False)')
     parser.add_option('--pr', "--precision_recall", action='store_true', dest="pr",
                       help="Output precision and recall as well as the f-score. Default: false")
+    
+    parser.add_option('--do_not_mark_quotes', action='store_true',
+                      help=":op1 \"David\" will be treated same as :op1 David")
+    
     parser.set_defaults(r=4, v=False, ms=False, pr=False)
+    
     return parser
 
 
@@ -730,8 +738,8 @@ def main(arguments):
             log_helper.error( "Error: File 2 has less AMRs than file 1")
             log_helper.error( "Ignoring remaining AMRs")
             break
-        amr1 = amr.AMR.parse_AMR_line(cur_amr1)
-        amr2 = amr.AMR.parse_AMR_line(cur_amr2)
+        amr1 = amr.AMR.parse_AMR_line(cur_amr1, do_not_mark_quotes = arguments.do_not_mark_quotes)
+        amr2 = amr.AMR.parse_AMR_line(cur_amr2, do_not_mark_quotes = arguments.do_not_mark_quotes)
         prefix1 = "a"
         prefix2 = "b"
         # Rename node to "a1", "a2", .etc

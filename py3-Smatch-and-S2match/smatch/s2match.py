@@ -99,6 +99,9 @@ def build_arg_parser():
                     help='default: \"split\"     you can also use \"None\": only direct vector lookup')
     parser.add_argument('--pr', action='store_true', default=False,
                         help="Output precision and recall as well as the f-score. Default: false")
+    parser.add_argument('--do_not_mark_quotes', action='store_true',
+                      help=":op1 \"David\" will be treated same as :op1 David")
+
     return parser
 
 
@@ -893,8 +896,8 @@ def main(arguments):
             log_helper.error( "Error: File 2 has less AMRs than file 1")
             log_helper.error( "Ignoring remaining AMRs")
             break
-        amr1 = amr.AMR.parse_AMR_line(cur_amr1)
-        amr2 = amr.AMR.parse_AMR_line(cur_amr2)
+        amr1 = amr.AMR.parse_AMR_line(cur_amr1, arguments.do_not_mark_quotes)
+        amr2 = amr.AMR.parse_AMR_line(cur_amr2, arguments.do_not_mark_quotes)
         prefix1 = "a"
         prefix2 = "b"
         # Rename node to "a1", "a2", .etc
@@ -977,7 +980,9 @@ def load_vecs(fp):
 
 #code necessary for Marco Damonte's subtask metric like reentrancies
 
-def compute_s2match_from_two_lists(list1, list2, vectorpath="../vectors/glove.6B.100d.txt", simfun="cosine", cutoff=0.5, diffsense=0.5, mwp="split"):
+def compute_s2match_from_two_lists(list1, list2
+        , vectorpath="../vectors/glove.6B.100d.txt", simfun="cosine"
+        , cutoff=0.5, diffsense=0.5, mwp="split"):
     
     def parse_relations(rels, v2c):
         var_list = []

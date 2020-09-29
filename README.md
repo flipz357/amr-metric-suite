@@ -49,6 +49,8 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 
 ### System IDs and short description
 
+GSII: Iterative Graph-decoding (see below for reference)
+TBWT: Transition based parsing with well-typedness (see below for reference)
 STOG: Graph prediction, MST-decoding (see below for reference)
 GPLA: Graph prediction with latent alignment (see below for reference)
 TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
@@ -60,6 +62,7 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 | ---          | ---     | ---       | ---      | ---            | 
 | GSII         | 80.1    | 81.5      | 2020     | [yes](https://github.com/jcyk/AMR-gs)          |
 | GSII-noRecat | 78.6    | 79.9      | 2020     | [yes](https://github.com/jcyk/AMR-gs)          |
+| TBWT         | 77.0    | 78.3      | 2020     | [yes](https://github.com/coli-saar/topdown-parser)        
 | STOG-BERT    | 76.3,   | 77.9      | 2019     | [yes](https://github.com/sheng-z/stog)            |
 | STOG         | 74.6,   | ?         | 2019     | [yes](https://github.com/sheng-z/stog)            |
 | GPLA         | 74.5,   | 76.2      | 2018     | [yes](https://github.com/ChunchuanLv/AMR_AS_GRAPH_PREDICTION)            |      
@@ -71,6 +74,7 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 | System       | Degree  | Density   |  size(V)     | size(E)    |
 | ---          | ---     | ---       | ---          | ---        | 
 | GSII         | 0.071   | 0.0070    | 1.87         | 2.59       |
+| TWBT         | 0.100   | 0.0058    | 2.76         | 4.17       |
 | GPLA         | 0.083   | 0.0068    | 1.99         | 2.90       |      
 | GSII-noRecat | 0.102   | 0.0073    | 2.14         | 2.75       |
 | STOG-BERT    | 0.082   | 0.0069    | 2.42         | 3.19       |
@@ -81,19 +85,22 @@ TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 #### System dependencies
 
 
-| System        | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                         | recategorize | anon | notes                |
-| ---           | ---                 | ---                | ---                | ---                  | ---                  | ---                            | ---          | ---  | ---                  |
-| GSII          | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  | same pre/post proc as STOG | 
-| GSII-noRecat  | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner         | no           | no   |                      |
-| STOG-BERT     | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |                      |
-| STOG          | GloVe 300d          | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner         | yes          | yes  |                      |
-| GPLA          | Glove 300d          | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner         | yes          | no   |                      |
-| TOP-DOWN      | Glove 300d          | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner         | no           | no   |                      |
+| System        | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                                 | recategorize | anon | notes                |
+| ---           | ---                 | ---                | ---                | ---                  | ---                  | ---                                    | ---          | ---  | ---                  |
+| GSII          | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  | same pre/post proc as STOG | 
+| GSII-noRecat  | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | no           | no   |                      |
+| TWBT          | BERT                | no                 | no                 | yes                  | no                   | AMR2tree decomp (Lindeman 2019)        | no(?)        | no(?)|                      |
+| STOG-BERT     | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |                      |
+| STOG          | GloVe 300d          | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |                      |
+| GPLA          | Glove 300d          | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner                 | yes          | no   |                      |
+| TOP-DOWN      | Glove 300d          | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner                 | no           | no   |                      |
 
 
 ## References
 
 GSII: Deng Cai and Wai Lam. "AMR Parsing via Graph-Sequence Iterative Inference". arXiv preprint arXiv:2004.05572 (2020). [github](https://github.com/jcyk/AMR-gs)
+
+TBWT: Lindemann et al. "Fast semantic parsing with well-typedness guarantees". arXiv preprint arXiv:2009.07365. [github](https://github.com/coli-saar/topdown-parser)
 
 GPLA: Chunchuan Lyu and Ivan Titov. "Amr parsing as graph prediction with latent alignment." arXiv preprint arXiv:1805.05286 (2018). [github](https://github.com/ChunchuanLv/AMR_AS_GRAPH_PREDICTION)
 

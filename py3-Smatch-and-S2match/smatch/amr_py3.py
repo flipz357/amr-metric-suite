@@ -176,7 +176,7 @@ class AMR(object):
 
 
     @staticmethod
-    def parse_AMR_line(line):
+    def parse_AMR_line(line, do_not_mark_quotes = False):
         """
         Parse a AMR from line representation to an AMR object.
         This parsing algorithm scans the line once and process each character, in a shift-reduce style.
@@ -215,7 +215,7 @@ class AMR(object):
             if c == "\"":
                 # flip in_quote value when a quote symbol is encountered
                 # insert placeholder if in_quote from last symbol
-                if in_quote:
+                if in_quote and not do_not_mark_quotes:
                     cur_charseq.append('_')
                 in_quote = not in_quote
             elif c == "(":
