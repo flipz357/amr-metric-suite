@@ -1,7 +1,7 @@
 # AMR metrics: a suite 
 
 This project collects a state-of-the-art tracker table for AMR parsers and AMR graph matching metrics. 
-It accompanies the TACL paper [AMR similarity metrics from principles](https://transacl.org/index.php/tacl/article/view/2205/545).
+It accompanies the TACL paper **AMR similarity metrics from principles** ([arxiv](https://arxiv.org/abs/2001.10929), [TACL](https://transacl.org/index.php/tacl/article/view/2205/545))
 
 ## Content of this repo
 
