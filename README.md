@@ -1,4 +1,5 @@
-# amr-metric-suite 
+# AMR metrics: a suite 
+
 This project collects a state-of-the-art tracker table for AMR parsers and AMR graph matching metrics. 
 It accompanies the TACL paper [AMR similarity metrics from principles](https://transacl.org/index.php/tacl/article/view/2205/545).
 
@@ -49,11 +50,11 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 
 ### System IDs and short description
 
-GSII: Iterative Graph-decoding (see below for reference)
-TBWT: Transition based parsing with well-typedness (see below for reference)
-STOG: Graph prediction, MST-decoding (see below for reference)
-GPLA: Graph prediction with latent alignment (see below for reference)
-TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
+* GSII: Iterative Graph-decoding (see below for reference)
+* TBWT: Transition based parsing with well-typedness (see below for reference)
+* STOG: Graph prediction, MST-decoding (see below for reference)
+* GPLA: Graph prediction with latent alignment (see below for reference)
+* TOP-DOWN: Incremental root-to-leaf build up (see below for reference)
 
 
 #### Evaluation Results on AMR 2.0 test (higher=better)
