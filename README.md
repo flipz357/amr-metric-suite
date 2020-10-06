@@ -90,16 +90,15 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 
 
 | System       | external data                | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                                 | recategorize | anon | notes                |
-| ---          | ---                          | ---                 | ---                | ---                | ---                  | ---                  | ---                                    | ---          | ---  | ---                  |
+| ---          | ---                          | ---                 | ---                | ---                | ---                  | ---                  | ---                                    | ---          | ---  | --- |
 | GSII         | no                           | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  | same pre/post proc as STOG | 
-| S2S-pretrain | MT, AMR-silver, Constituency | BERT                | no                 | no                 | yes                  | no                   | no                                     | no           | no   |
-      |  
-| GSII-noRecat | no                           | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | no           | no   |                      |
-| TWBT         | no                           | BERT                | no                 | no                 | yes                  | no                   | AMR2tree decomp (Lindeman 2019)        | no(?)        | no(?)|                      |
-| STOG-BERT    | no                           | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |                      |
-| STOG         | no                           | GloVe 300d          | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |                      |
-| GPLA         | no                           | Glove 300d          | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner                 | yes          | no   |                      |
-| TOP-DOWN     | no                           | Glove 300d          | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner                 | no           | no   |                      |
+| S2S-pretrain | MT, AMR-silver, Constituency | BERT                | no                 | no                 | yes                  | no                   | no                                     | no           | no   |     | 
+| GSII-noRecat | no                           | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | no           | no   |     |
+| TWBT         | no                           | BERT                | no                 | no                 | yes                  | no                   | AMR2tree decomp (Lindeman 2019)        | no(?)        | no(?)|     |
+| STOG-BERT    | no                           | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |     |
+| STOG         | no                           | GloVe 300d          | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |     |
+| GPLA         | no                           | Glove 300d          | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner                 | yes          | no   |     |
+| TOP-DOWN     | no                           | Glove 300d          | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner                 | no           | no   |     |
 
 
 ## References
