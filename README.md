@@ -88,6 +88,7 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 | STOG         | ?       | ?         | ?            |  ?         |
 | TOP-DOWN     | 0.110   | 0.0078    | 2.37         | 3.32       |       
 
+Structure error defined as mean absolute deviation from gold graph over all graph pairs.
 
 #### System dependencies
 
