@@ -51,7 +51,8 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 ### System IDs and short description
 
 * GSII: Iterative Graph-decoding (see below for reference)
-* S2S-pretrain: Seq2Seq pretrained with several mio MT gold data and Constituency/AMR silver data
+* S2S-pretrainD: Seq2Seq pretrained with several mio German MT gold data and Constituency/AMR silver data
+* S2S-pretrainF: same as S2S-pretrain but with French MT data 
 * TBWT: Transition based parsing with well-typedness (see below for reference)
 * STOG: Graph prediction, MST-decoding (see below for reference)
 * GPLA: Graph prediction with latent alignment (see below for reference)
@@ -62,8 +63,9 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 
 | System       | Smatch  | S2match   | Year     | Code available |
 | ---          | ---     | ---       | ---      | ---            | 
+| S2S-pretrainF| 81.4    | 82.5      | 2020     | [yes](https://github.com/xdqkid/S2S-AMR-Parser)          |
 | GSII         | 80.3    | 81.5      | 2020     | [yes](https://github.com/jcyk/AMR-gs)          |
-| S2S-pretrain | 80.2    | 81.5      | 2020     | [yes](https://github.com/xdqkid/S2S-AMR-Parser)          |
+| S2S-pretrainD| 80.2    | 81.5      | 2020     | [yes](https://github.com/xdqkid/S2S-AMR-Parser)          |
 | GSII-noRecat | 78.6    | 79.9      | 2020     | [yes](https://github.com/jcyk/AMR-gs)          |
 | TBWT         | 77.0    | 78.3      | 2020     | [yes](https://github.com/coli-saar/topdown-parser)        
 | STOG-BERT    | 76.3,   | 77.9      | 2019     | [yes](https://github.com/sheng-z/stog)            |
@@ -76,8 +78,9 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 
 | System       | Degree  | Density   |  size(V)     | size(E)    |
 | ---          | ---     | ---       | ---          | ---        | 
+| S2S-pretrainF| 0.070   | 0.0059    | 1.86         | 2.65       |
 | GSII         | 0.071   | 0.0070    | 1.87         | 2.59       |
-| S2S-pretrain | 0.071   | 0.0062    | 2.03         | 2.80       |
+| S2S-pretrainD| 0.071   | 0.0062    | 2.03         | 2.80       |
 | TWBT         | 0.100   | 0.0058    | 2.76         | 4.17       |
 | GPLA         | 0.083   | 0.0068    | 1.99         | 2.90       |      
 | GSII-noRecat | 0.102   | 0.0073    | 2.14         | 2.75       |
@@ -89,16 +92,17 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 #### System dependencies
 
 
-| System       | external data                | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                                 | recategorize | anon | notes                |
-| ---          | ---                          | ---                 | ---                | ---                | ---                  | ---                  | ---                                    | ---          | ---  | --- |
-| GSII         | no                           | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  | same pre/post proc as STOG | 
-| S2S-pretrain | MT, AMR-silver, Constituency | BERT                | no                 | no                 | yes                  | yes                  | no                                     | no           | no   |     | 
-| GSII-noRecat | no                           | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | no           | no   |     |
-| TWBT         | no                           | BERT                | no                 | no                 | yes                  | no                   | AMR2tree decomp (Lindeman 2019)        | no(?)        | no(?)|     |
-| STOG-BERT    | no                           | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |     |
-| STOG         | no                           | GloVe 300d          | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |     |
-| GPLA         | no                           | Glove 300d          | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner                 | yes          | no   |     |
-| TOP-DOWN     | no                           | Glove 300d          | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner                 | no           | no   |     |
+| System       | external data                      | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                                 | recategorize | anon | notes                |
+| ---          | ---                                | ---                 | ---                | ---                | ---                  | ---                  | ---                                    | ---          | ---  | --- |
+| GSII         | no                                 | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  | same pre/post proc as STOG | 
+| S2S-pretrainD| MT(de-en), AMR-silver, Constituency| BERT                | no                 | no                 | yes                  | yes                  | no                                     | no           | no   |     | 
+| S2S-pretrainF| MT(fr-en), AMR-silver, Constituency| BERT                | no                 | no                 | yes                  | yes                  | no                                     | no           | no   |     | 
+| GSII-noRecat | no                                 | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | no           | no   |     |
+| TWBT         | no                                 | BERT                | no                 | no                 | yes                  | no                   | AMR2tree decomp (Lindeman 2019)        | no(?)        | no(?)|     |
+| STOG-BERT    | no                                 | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |     |
+| STOG         | no                                 | GloVe 300d          | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |     |
+| GPLA         | no                                 | Glove 300d          | yes                | no                 | no                   | no                   | CoreNLP, lemma/pos/ner                 | yes          | no   |     |
+| TOP-DOWN     | no                                 | Glove 300d          | yes                | no                 | yes                  | no                   | CoreNLP, lemma/pos/ner                 | no           | no   |     |
 
 
 ## References
