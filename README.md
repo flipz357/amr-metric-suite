@@ -51,8 +51,8 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 ### System IDs and short description
 
 * GSII: Iterative Graph-decoding (see below for reference)
-* S2S-pretrainD: Seq2Seq pretrained with several mio German MT gold data and Constituency/AMR silver data
-* S2S-pretrainF: same as S2S-pretrain but with French MT data 
+* S2S-pretrain:  Seq2Seq pretrained with 3.9M WMT14 English-to-German MT gold data and Constituency/AMR silver data based on English part of the former. (see below for reference)
+* S2S-pretrainM: Similar to S2S-pretrain, but no constituency and AMR silver data from different corpus (WMT14 English monolingual dataset.) (see below for reference)
 * TBWT: Transition based parsing with well-typedness (see below for reference)
 * STOG: Graph prediction, MST-decoding (see below for reference)
 * GPLA: Graph prediction with latent alignment (see below for reference)
@@ -63,9 +63,9 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 
 | System       | Smatch  | S2match   | Year     | Code available |
 | ---          | ---     | ---       | ---      | ---            | 
-| S2S-pretrainF| 81.4    | 82.5      | 2020     | [yes](https://github.com/xdqkid/S2S-AMR-Parser)          |
+| S2S-pretrainM| 81.4    | 82.5      | 2020     | [yes](https://github.com/xdqkid/S2S-AMR-Parser)          |
 | GSII         | 80.3    | 81.5      | 2020     | [yes](https://github.com/jcyk/AMR-gs)          |
-| S2S-pretrainD| 80.2    | 81.5      | 2020     | [yes](https://github.com/xdqkid/S2S-AMR-Parser)          |
+| S2S-pretrain | 80.2    | 81.5      | 2020     | [yes](https://github.com/xdqkid/S2S-AMR-Parser)          |
 | GSII-noRecat | 78.6    | 79.9      | 2020     | [yes](https://github.com/jcyk/AMR-gs)          |
 | TBWT         | 77.0    | 78.3      | 2020     | [yes](https://github.com/coli-saar/topdown-parser)        
 | STOG-BERT    | 76.3,   | 77.9      | 2019     | [yes](https://github.com/sheng-z/stog)            |
@@ -96,8 +96,8 @@ Structure error defined as mean absolute deviation from gold graph over all grap
 | System       | external data                      | word-embedding type | copying (src)      | copying (tgt)      | attention (src)      | attention (tgt)      | PrePro                                 | recategorize | anon | notes                |
 | ---          | ---                                | ---                 | ---                | ---                | ---                  | ---                  | ---                                    | ---          | ---  | --- |
 | GSII         | no                                 | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  | same pre/post proc as STOG | 
-| S2S-pretrainD| MT(de-en), AMR-silver, Constituency| BERT                | no                 | no                 | yes                  | yes                  | no                                     | no           | no   |     | 
-| S2S-pretrainF| MT(fr-en), AMR-silver, Constituency| BERT                | no                 | no                 | yes                  | yes                  | no                                     | no           | no   |     | 
+| S2S-pretrainM| MT(de-en), AMR-silver              | random              | no                 | no                 | yes                  | yes                  | no                                     | no           | no   |     | 
+| S2S-pretrain | MT(de-en), AMR-silver, Constituency| random              | no                 | no                 | yes                  | yes                  | no                                     | no           | no   |     | 
 | GSII-noRecat | no                                 | BERT                | yes                | no                 | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | no           | no   |     |
 | TWBT         | no                                 | BERT                | no                 | no                 | yes                  | no                   | AMR2tree decomp (Lindeman 2019)        | no(?)        | no(?)|     |
 | STOG-BERT    | no                                 | BERT                | yes                | yes                | yes                  | yes                  | CoreNLP, lemma/pos/ner                 | yes          | yes  |     |
