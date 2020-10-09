@@ -78,9 +78,9 @@ see *py2-Smatch-and-S2match* or *py3-Smatch-and-S2match*
 
 | System       | Degree  | Density   |  size(V)     | size(E)    |
 | ---          | ---     | ---       | ---          | ---        | 
-| S2S-pretrainF| 0.070   | 0.0059    | 1.86         | 2.65       |
+| S2S-pretrainM| 0.070   | 0.0059    | 1.86         | 2.65       |
 | GSII         | 0.071   | 0.0070    | 1.87         | 2.59       |
-| S2S-pretrainD| 0.071   | 0.0062    | 2.03         | 2.80       |
+| S2S-pretrain | 0.071   | 0.0062    | 2.03         | 2.80       |
 | TWBT         | 0.100   | 0.0058    | 2.76         | 4.17       |
 | GPLA         | 0.083   | 0.0068    | 1.99         | 2.90       |      
 | GSII-noRecat | 0.102   | 0.0073    | 2.14         | 2.75       |
