@@ -72,6 +72,18 @@ def get_amr_line(input_f):
             cur_amr.append(line.strip())
     return "".join(cur_amr)
 
+def load_vecs(fp):
+    dic={}
+    if not fp:
+        return dic
+    with open(fp, "r") as f:
+        for line in f:
+            ls = line.split()
+            word = ls[0]
+            vec = np.array([float(x) for x in ls[1:]])
+            dic[word] = vec
+    return dic
+
 
 def build_arg_parser():
     """
@@ -106,21 +118,21 @@ def build_arg_parser():
 
 
 
-def cosine_sim(a,b):
+def cosine_sim(a, b):
     #cosine similarity
-    dist = cosine(a,b)
+    dist = cosine(a, b)
     sim = 1 - min(1,dist)
     return sim
 
-def euclidean_sim(a,b):
+def euclidean_sim(a, b):
     #euclidean similarity
-    dist = euclidean(a,b)
+    dist = euclidean(a, b)
     sim = 1 / (1 + math.e**(-dist))
     return sim
 
-def cityblock_sim(a,b):
+def cityblock_sim(a, b):
     #manh similarity
-    dist = cityblock(a,b)
+    dist = cityblock(a, b)
     sim = 1 / (1 + math.e**(-dist))
     return sim
 
@@ -195,11 +207,10 @@ def get_best_match(instance1, attribute1, relation1,
 
 
 
-def maybe_get_vec(word,vecs, mwp ="split"):
+def maybe_get_vec(word, vecs, mwp ="split"):
     v = None
-    #print(word)
     if word in vecs:
-        v = vecs[word]
+        v = np.copy(vecs[word])
     #if it's a multi-word concept and not contained in vectors
     elif "-" in word:
 
@@ -211,10 +222,10 @@ def maybe_get_vec(word,vecs, mwp ="split"):
                 if w in vecs:
                     l.append(vecs[w])
             if l:
-                v = np.sum(np.array(l),axis=0)
+                v = np.sum(np.array(l), axis=0)
     return v
     
-def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"):
+def maybe_sim(a, b, vecs, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp ="split"):
     
     # if identical, return 1
     if a == b:
@@ -222,8 +233,8 @@ def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"
     
     # in case one or two are a pred, we also keep a string without the sense
     
-    a_wo_sense=None
-    b_wo_sense=None
+    a_wo_sense = None
+    b_wo_sense = None
 
 
     #if it's a pred we remove the sense, for now
@@ -234,24 +245,24 @@ def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"
 
     # if preds are equal but not sense return diffsense score, e.g., hit-01 vs hit-02
     if a_wo_sense and b_wo_sense and a_wo_sense == b_wo_sense:
-        return 1.00*diffsense
+        return 1.00 * diffsense
 
     #if same string but only one is pred --> different sense of concept, e.g. hit-01 vs hit
     elif a_wo_sense and a_wo_sense == b:
-        return 1.00*diffsense
+        return 1.00 * diffsense
 
     elif b_wo_sense and b_wo_sense == a:
-        return 1.00*diffsense
+        return 1.00 * diffsense
 
     # now we know now that two concepts are different and get their vectors
     if a_wo_sense:
-        a_vec = maybe_get_vec(a_wo_sense,vecs, "None")
+        a_vec = maybe_get_vec(a_wo_sense, vecs, "None")
     else:
-        a_vec = maybe_get_vec(a,vecs, mwp)
+        a_vec = maybe_get_vec(a, vecs, mwp)
     if b_wo_sense:
-        b_vec = maybe_get_vec(b_wo_sense,vecs, "None")
+        b_vec = maybe_get_vec(b_wo_sense, vecs, "None")
     else:
-        b_vec = maybe_get_vec(b,vecs, mwp)
+        b_vec = maybe_get_vec(b, vecs, mwp)
 
     # if there is no vector, return 0
     if a_vec is None or b_vec is None:
@@ -261,14 +272,14 @@ def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"
     if "-" in a and a_wo_sense:
         v = maybe_get_vec(a_wo_sense+"s", vecs, mwp="None")
         if v is not None:
-            a_vec+=v
+            a_vec += v
     if "-" in b and b_wo_sense:
         v = maybe_get_vec(b_wo_sense+"s", vecs, mwp="None")
         if v is not None:
-            b_vec+=v
+            b_vec += v
 
     #similarity 
-    sim = simfun(a_vec,b_vec)
+    sim = simfun(a_vec, b_vec)
     if not sim:
         return 0.00
 
@@ -276,13 +287,13 @@ def maybe_sim(a,b,vecs,cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"
 
         #eg. hit-01 vs punch or hit-01 vs punch-0x ---> diffsense*(sim(hit,punch))
         if bool(a_wo_sense) or bool(b_wo_sense):
-            return sim*diffsense
+            return sim * diffsense
         else:
             return sim
     else:
         return 0.00
 
-def maybe_has_sim(a,b,sim_dict,vecs={},cutoff=0.5, diffsense=0.5,simfun=cosine_sim, mwp ="split"):
+def maybe_has_sim(a, b, sim_dict, vecs={}, cutoff=0.5, diffsense=0.5, simfun=cosine_sim, mwp="split"):
     #maybe we have the computed similarities already?
     if a+"_"+b in sim_dict: 
         return sim_dict[a+"_"+b] 
@@ -291,16 +302,13 @@ def maybe_has_sim(a,b,sim_dict,vecs={},cutoff=0.5, diffsense=0.5,simfun=cosine_s
         return sim_dict[b+"_"+a] 
     else:
         #compute similarity and save
-        s=maybe_sim(a,b,vecs,cutoff=cutoff, diffsense=diffsense, simfun=simfun, mwp="split")
+        s=maybe_sim(a, b, vecs, cutoff=cutoff, diffsense=diffsense, simfun=simfun, mwp="split")
         if verbose:
             log_helper.debug( "Similarity", a, b, s)
         sim_dict[a+"_"+b] = s
         sim_dict[b+"_"+a] = s
         return s
         
-
-
-
 
 def compute_pool(instance1, attribute1, relation1,
                  instance2, attribute2, relation2,
@@ -359,7 +367,9 @@ def compute_pool(instance1, attribute1, relation1,
             if instance1[i][0].lower() == instance2[j][0].lower():
                 value_1 = instance1[i][2].lower()
                 value_2 = instance2[j][2].lower()
-                similarity = maybe_has_sim(value_1,value_2,sim_dict,vecs=vectors,cutoff=cutoff, diffsense=diffsense, simfun=simfun, mwp=mwp)
+                similarity = maybe_has_sim(value_1, value_2, sim_dict,vecs=vectors, 
+                                           cutoff=cutoff, diffsense=diffsense, 
+                                           simfun=simfun, mwp=mwp)
                 # get node index by stripping the prefix
                 node1_index = int(instance1[i][1][len(prefix1):])
                 node2_index = int(instance2[j][1][len(prefix2):])
@@ -965,21 +975,9 @@ def main(arguments):
     args.f[0].close()
     args.f[1].close()
 
-def load_vecs(fp):
-    dic={}
-    if not fp:
-        return dic
-    with open(fp,"r") as f:
-        for line in f:
-            ls = line.split()
-            word = ls[0]
-            vec = np.array([float(x) for x in ls[1:]])
-            dic[word] = vec
-    return dic
 
 
 #code necessary for Marco Damonte's subtask metric like reentrancies
-
 def compute_s2match_from_two_lists(list1, list2
         , vectorpath="../vectors/glove.6B.100d.txt", simfun="cosine"
         , cutoff=0.5, diffsense=0.5, mwp="split"):
