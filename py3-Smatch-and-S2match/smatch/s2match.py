@@ -72,10 +72,7 @@ def get_amr_line(input_f):
             cur_amr.append(line.strip())
     return "".join(cur_amr)
 
-def load_vecs(fp, w2v=False):
-    if w2v:
-        import gensim.downloader
-        return gensim.downloader.load('word2vec-google-news-300')
+def load_vecs(fp):
     dic={}
     if not fp:
         return dic
