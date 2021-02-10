@@ -394,6 +394,23 @@ def compute_pool(instance1, attribute1, relation1,
                 else:
                     weight_dict[node_pair] = {}
                     weight_dict[node_pair][-1] = 1
+            elif attribute1[i][0].lower() == attribute2[j][0].lower() == "top":
+                value_1 = attribute1[i][2].lower()
+                value_2 = attribute2[j][2].lower()
+                similarity = maybe_has_sim(value_1, value_2, sim_dict, vecs=vectors, 
+                                           cutoff=cutoff, diffsense=diffsense, 
+                                           simfun=simfun, mwp=mwp)
+                # get node index by stripping the prefix
+                node1_index = int(attribute1[i][1][len(prefix1):])
+                node2_index = int(attribute2[j][1][len(prefix2):])
+                candidate_mapping[node1_index].add(node2_index)
+                node_pair = (node1_index, node2_index)
+                # use -1 as key in weight_dict for attribute triples and attribute triples
+                if node_pair in weight_dict:
+                    weight_dict[node_pair][-1] += similarity
+                else:
+                    weight_dict[node_pair] = {}
+                    weight_dict[node_pair][-1] = similarity
     for i in range(0, len(relation1)):
         for j in range(0, len(relation2)):
             # if both relation share the same name
