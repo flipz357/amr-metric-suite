@@ -114,23 +114,31 @@ def build_arg_parser():
     return parser
 
 
-
 def cosine_sim(a, b):
-    #cosine similarity
+    # cosine similarity, this is set as default.
+    
+    # Although "real" cosine similarity would be in [-1, 1] we treat everything < 0 as 0, since
+    # the Smatch alignment may be ill defined when concept similarity < 0.0. 
+    # An extension for future work could be to conduct the alignment on the 
+    # absolute value of the similarity and perform the scoring after. This way 
+    # Smatch could align "antonyms" (vectors pointing in opposite direction, cosim < 0) if needed but 
+    # it would reduce the overall score, which could be desired when comparing AMRs of sentences
+    # that contain antonyms/opposite meaning.
+
     dist = cosine(a, b)
     sim = 1 - min(1, dist)
-    return sim
+    return sim   
 
 def euclidean_sim(a, b):
-    #euclidean similarity
+    #euclidean distance, projected to similarity [0,1]
     dist = euclidean(a, b)
-    sim = 1 / (1 + math.e**(-dist))
+    sim = 1 / (math.e**dist)
     return sim
 
 def cityblock_sim(a, b):
-    #manh similarity
-    dist = cityblock(a,b)
-    sim = 1 / (1 + math.e**(-dist))
+    #manh distance, projected to similarity in [0, 1] 
+    dist = cityblock(a, b) 
+    sim = 1 / (math.e**dist)
     return sim
 
 def get_best_match(instance1, attribute1, relation1,
