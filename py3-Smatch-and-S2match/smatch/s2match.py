@@ -201,7 +201,7 @@ def get_best_match(instance1, attribute1, relation1,
             if verbose:
                 log_helper.debug( "Gain after the hill-climbing", gain)
             # hill-climbing until there will be no gain for new node mapping
-            if gain <= 0:
+            if gain <= 0.0000000001:
                 break
             # otherwise update match_num and mapping
             match_num += gain
