@@ -31,7 +31,7 @@ def get_amrs(inp):
         dat.append(penman.decode(d))
     datg = [nx.DiGraph() for x in dat]
     for i,g in enumerate(dat):
-        for t in g.triples():
+        for t in g.triples:
             datg[i].add_edge(t[0],t[2],label=t[1])
     return datg
 
