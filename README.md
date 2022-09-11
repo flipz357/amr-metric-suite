@@ -2,7 +2,7 @@
 
 This repo collects AMR graph matching metrics
 
-- The repo itself contains code for S2match, smatch and extended smatch metrics (SRL, NER, etc.). It accompanies the TACL paper **AMR similarity metrics from principles** ([arxiv](https://arxiv.org/abs/2001.10929), [TACL](https://transacl.org/index.php/tacl/article/view/2205/545))
+- The repo itself contains code for Smatch, S2match and extended smatch metrics (SRL, NER, etc.). It accompanies the TACL paper **AMR similarity metrics from principles** ([arxiv](https://arxiv.org/abs/2001.10929), [TACL](https://transacl.org/index.php/tacl/article/view/2205/545))
 
 - For Weisfiler-Leman AMR metrics that can match broader and graded structures and provides n:m alignments see [this repo](https://github.com/flipz357/weisfeiler-leman-amr-metrics).
 
