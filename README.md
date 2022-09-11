@@ -1,6 +1,6 @@
 # AMR metrics: a suite 
 
-This project collects a state-of-the-art tracker table for AMR parsers and AMR graph matching metrics. 
+This project collects AMR graph matching metrics
 
 - This repo contains code for S2match, smatch and extended smatch metrics (SRL, NER, etc.). It accompanies the TACL paper **AMR similarity metrics from principles** ([arxiv](https://arxiv.org/abs/2001.10929), [TACL](https://transacl.org/index.php/tacl/article/view/2205/545))
 
