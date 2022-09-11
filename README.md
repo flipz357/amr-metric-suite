@@ -6,9 +6,9 @@ This project collects AMR graph matching metrics
 
 - For Weisfiler-Leman AMR metrics that can match broader and graded structures see [this repo](https://github.com/flipz357/weisfeiler-leman-amr-metrics).
 
-- We also created a [simple sentence-to-AMR alignment tool](https://github.com/flipz357/Simple-AMR-Aligner)
-
 - A sentence similarity benchmark for AMR metrics based on paired AMRs with annoations can be found in the [BAMBOO](https://github.com/flipz357/bamboo-amr-benchmark)
+
+- We also created a [simple sentence-to-AMR alignment tool](https://github.com/flipz357/Simple-AMR-Aligner)
 
 ## Content of *this* repo
 
