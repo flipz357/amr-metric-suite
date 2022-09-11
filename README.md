@@ -8,6 +8,8 @@ This project collects AMR graph matching metrics
 
 - We also created a [simple sentence-to-AMR alignment tool](https://github.com/flipz357/Simple-AMR-Aligner)
 
+- A sentence similarity benchmark for AMR metrics based on paired AMRs with annoations can be found in the [BAMBOO](https://github.com/flipz357/bamboo-amr-benchmark)
+
 ## Content of *this* repo
 
 1. Scripts for calculating Smatch and S2match (Soft Semantic match, speak [estuːmætʃ]).
