@@ -4,7 +4,7 @@ This project collects AMR graph matching metrics
 
 - This repo contains code for S2match, smatch and extended smatch metrics (SRL, NER, etc.). It accompanies the TACL paper **AMR similarity metrics from principles** ([arxiv](https://arxiv.org/abs/2001.10929), [TACL](https://transacl.org/index.php/tacl/article/view/2205/545))
 
-- For Weisfiler-Leman AMR metrics that can match broader and graded structures see [this repo](https://github.com/flipz357/weisfeiler-leman-amr-metrics).
+- For Weisfiler-Leman AMR metrics that can match broader and graded structures and provides n:m alignments see [this repo](https://github.com/flipz357/weisfeiler-leman-amr-metrics).
 
 - A sentence similarity benchmark for AMR metrics based on paired AMRs with annoations can be found in the [BAMBOO](https://github.com/flipz357/bamboo-amr-benchmark)
 
