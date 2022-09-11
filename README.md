@@ -1,9 +1,14 @@
 # AMR metrics: a suite 
 
 This project collects a state-of-the-art tracker table for AMR parsers and AMR graph matching metrics. 
-It accompanies the TACL paper **AMR similarity metrics from principles** ([arxiv](https://arxiv.org/abs/2001.10929), [TACL](https://transacl.org/index.php/tacl/article/view/2205/545))
 
-## Content of this repo
+- This repo contains code for S2match, smatch and extended smatch metrics (SRL, NER, etc.). It accompanies the TACL paper **AMR similarity metrics from principles** ([arxiv](https://arxiv.org/abs/2001.10929), [TACL](https://transacl.org/index.php/tacl/article/view/2205/545))
+
+- For Weisfiler-Leman AMR metrics that can match broader and graded structures see [this repo](https://github.com/flipz357/weisfeiler-leman-amr-metrics).
+
+- We also created a [simple sentence-to-AMR alignment tool](https://github.com/flipz357/Simple-AMR-Aligner)
+
+## Content of *this* repo
 
 1. Scripts for calculating Smatch and S2match (Soft Semantic match, speak [estuːmætʃ]).
 And scripts for calculating the structure error of two AMR graph banks. 
