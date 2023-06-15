@@ -6,9 +6,12 @@ This repo collects AMR graph matching metrics
 
 - For Weisfiler-Leman AMR metrics that can match broader and graded structures and provides n:m alignments see [this repo](https://github.com/flipz357/weisfeiler-leman-amr-metrics).
 
-- A sentence similarity benchmark for AMR metrics based on paired AMRs with annoations can be found in the [BAMBOO](https://github.com/flipz357/bamboo-amr-benchmark)
+- A sentence similarity benchmark for AMR metrics based on paired AMRs with annoations can be found in the [BAMBOO](https://github.com/flipz357/bamboo-amr-benchmark), parser quality annotations can be found [here](https://github.com/Heidelberg-NLP/AMRParseEval)
 
-- We also created a [simple sentence-to-AMR alignment tool](https://github.com/flipz357/Simple-AMR-Aligner)
+- Optimal Smatch and graph standardization (can be used for every metric) as well as some more extended sub-graph measurements (AGENT, CAUSE, INSTRUMENT, etc.) and confidence intervals are available in [Smatch++](https://github.com/flipz357)
+
+- We also created a [simple text-to-AMR alignment tool](https://github.com/flipz357/Simple-AMR-Aligner)
+
 
 ## Content of *this* repo
 
